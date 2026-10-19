@@ -6,11 +6,12 @@ var app = builder.Build();
 
 app.Use(async (context, next) =>
 {
-    await context.Response.WriteAsync("first middleware");
+    await context.Response.WriteAsync("first middleware\n");
     await next(context);
 });
 
-app.UseMiddleware<MyMiddleware>();
+// app.UseMiddleware<MyMiddleware>();
+app.UseMyMiddleware(); // syntactic sugar, equal to MyMiddlewareExtensions.UseMyMiddleware(app);
 
 app.Run (async (HttpContext context) =>
 {
@@ -18,7 +19,7 @@ app.Run (async (HttpContext context) =>
     string method = context.Request.Method;
     
     await context.Response.WriteAsync($"<p>path:{path}</p>");
-    await context.Response.WriteAsync($"<p>method:{method}</p>");
+    await context.Response.WriteAsync($"<p>method:{method}</p>\n");
 });
 
 app.Run();
