@@ -1,5 +1,16 @@
+using hello_asp;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddTransient<MyMiddleware>();
 var app = builder.Build();
+
+app.Use(async (context, next) =>
+{
+    await context.Response.WriteAsync("first middleware");
+    await next(context);
+});
+
+app.UseMiddleware<MyMiddleware>();
 
 app.Run (async (HttpContext context) =>
 {
