@@ -4,6 +4,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<MyMiddleware>();
 var app = builder.Build();
 
+app.UseWhen(
+    context => context.Request.Query.ContainsKey("hello"),
+    appwhen =>
+    {
+        appwhen.Use(async (context, next) =>
+        {
+            await context.Response.WriteAsync("world!\n");
+            await next();
+        });
+    }
+);
+
 app.Use(async (context, next) =>
 {
     await context.Response.WriteAsync("first middleware\n");
