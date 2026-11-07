@@ -1,12 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
-
+using hello_asp.Models;
 namespace hello_asp.Controllers;
 
-public class HomeController
+public class HomeController : Controller
 {
     [Route("HomeController")]
-    public string Controller1()
+    public ContentResult Controller1()
     {
-        return "Hello Controller!";
+        return Content("Hello Controller!", "text/plain");
+    }
+
+    [Route("person")]
+    public JsonResult Person()
+    {
+        var person = new Person()
+        {
+            Id = Guid.NewGuid(),
+            Name = "John Doe",
+        };
+        return Json(person); // return new JsonResult(person);
     }
 }
