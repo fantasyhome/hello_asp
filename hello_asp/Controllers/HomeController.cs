@@ -38,9 +38,45 @@ public class HomeController : Controller
     }
     
     [Route("file-download3")]
-    public FileContentResult FileDownload3()
+    public IActionResult FileDownload3() // IActionResult is the parent of all result
     {
         byte[] bytes = System.IO.File.ReadAllBytes("wwwroot/02_3.jpg");
         return new FileContentResult(bytes, "image/jpeg");
+    }
+
+    [Route("Book")]
+    public IActionResult OldBook()
+    {
+        return new LocalRedirectResult("/NewBook",true); // permanent == true浏览器可能记住旧地址到新地址的映射
+    }
+    
+    [Route("NewBook")]
+    public IActionResult Book()
+    {
+        if (!Request.Query.ContainsKey("BookId"))
+        {
+            return BadRequest("BookId is missing");
+        }
+
+        if (string.IsNullOrEmpty(Convert.ToString(Request.Query["BookId"])))
+        {
+            return BadRequest("BookId is empty");
+        }
+        
+        int bookId = Convert.ToInt16
+            (ControllerContext.HttpContext.Request.Query["BookId"]);
+        if (bookId <= 0 || bookId > 1000)
+        {
+            Response.StatusCode = 404;
+            return Content("BookId is invalid");
+        }
+
+        if (Convert.ToBoolean(Request.Query["IsLoggedIn"]) == false)
+        {
+            Response.StatusCode = 401;
+            return Unauthorized("User unauthorized");
+        }
+        
+        return File("/02_3.jpg","image/jpeg");
     }
 }
