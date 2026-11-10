@@ -50,21 +50,21 @@ public class HomeController : Controller
         return new LocalRedirectResult("/NewBook",true); // permanent == true浏览器可能记住旧地址到新地址的映射
     }
     
-    [Route("NewBook")]
-    public IActionResult Book()
+    // Route Parameter has higher priority than query string while model binding
+    // http://localhost:5120/NewBook/1/?bookId=-10&IsLoggedIn=true bookId will be 1,
+    // but you can specify the source of model binding
+    [Route("NewBook/{bookId?}")]
+    public IActionResult Book([FromQuery]int? bookId, [FromQuery]Person person)
     {
-        if (!Request.Query.ContainsKey("BookId"))
+        // if (!Request.Query.ContainsKey("BookId"))
+        // {
+        //     return BadRequest("BookId is missing");
+        // }
+        if (!bookId.HasValue)
         {
             return BadRequest("BookId is missing");
         }
-
-        if (string.IsNullOrEmpty(Convert.ToString(Request.Query["BookId"])))
-        {
-            return BadRequest("BookId is empty");
-        }
         
-        int bookId = Convert.ToInt16
-            (ControllerContext.HttpContext.Request.Query["BookId"]);
         if (bookId <= 0 || bookId > 1000)
         {
             Response.StatusCode = 404;
