@@ -51,10 +51,11 @@ public class HomeController : Controller
     }
     
     // Route Parameter has higher priority than query string while model binding
+    // The priority of model binding is: form fields, request body, route data, query string parameters
     // http://localhost:5120/NewBook/1/?bookId=-10&IsLoggedIn=true bookId will be 1,
     // but you can specify the source of model binding
     [Route("NewBook/{bookId?}")]
-    public IActionResult Book([FromQuery]int? bookId, [FromQuery]Person person)
+    public IActionResult Book([FromQuery]int? bookId)
     {
         // if (!Request.Query.ContainsKey("BookId"))
         // {
@@ -78,5 +79,27 @@ public class HomeController : Controller
         }
         
         return File("/02_3.jpg","image/jpeg");
+    }
+
+    [Route("register")]
+    public IActionResult Register(Person person)
+    {
+        
+        if (!ModelState.IsValid)
+        {
+            List<string> errorList = new List<string>();
+            foreach (var value in ModelState.Values)
+            {
+                foreach (var error in value.Errors)
+                {
+                    errorList.Add(error.ErrorMessage);
+                }
+            }
+            
+            string errorMessage = string.Join("\n", errorList);
+            return BadRequest(errorMessage);
+        }
+
+        return Content($"{person}");
     }
 }
