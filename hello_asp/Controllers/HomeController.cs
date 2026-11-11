@@ -87,16 +87,20 @@ public class HomeController : Controller
         
         if (!ModelState.IsValid)
         {
-            List<string> errorList = new List<string>();
-            foreach (var value in ModelState.Values)
-            {
-                foreach (var error in value.Errors)
-                {
-                    errorList.Add(error.ErrorMessage);
-                }
-            }
+            // List<string> errorList = new List<string>();
+            // foreach (var value in ModelState.Values)
+            // {
+            //     foreach (var error in value.Errors)
+            //     {
+            //         errorList.Add(error.ErrorMessage);
+            //     }
+            // }
+            //
+            // string errorMessage = string.Join("\n", errorList);
             
-            string errorMessage = string.Join("\n", errorList);
+            string errorMessage = string.Join("\n",
+                ModelState.Values.SelectMany(value => value.Errors)
+                    .Select(error => error.ErrorMessage));
             return BadRequest(errorMessage);
         }
 
