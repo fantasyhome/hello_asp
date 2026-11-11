@@ -17,6 +17,9 @@ public class Person
     [MinimumYearValidator(2026)]
     public DateTime? DateOfBirth { get; set; }
     
+    [DateRangeValidator("DateOfBirth", ErrorMessage = "Date of death shouldn't be older than DateOfBirth")]
+    public DateTime? DateOfDeath { get; set; }
+    
     public override string ToString()
     {
         return JsonSerializer.Serialize(this, new JsonSerializerOptions
