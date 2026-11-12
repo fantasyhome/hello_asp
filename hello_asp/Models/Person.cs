@@ -4,7 +4,7 @@ using hello_asp.CustomValidators;
 
 namespace hello_asp.Models;
 
-public class Person
+public class Person : IValidatableObject
 {
     public Guid Id { get; set; }
     
@@ -26,5 +26,14 @@ public class Person
         {
             WriteIndented = true
         });
+    }
+
+    // 不可复用在其他类的快速验证
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (!DateOfBirth.HasValue && !DateOfDeath.HasValue)
+        {
+            yield return new ValidationResult("", [nameof(DateOfDeath)]);// 多个yield组合成IEnumerable
+        }
     }
 }
