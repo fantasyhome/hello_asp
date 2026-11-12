@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using hello_asp.CustomValidators;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace hello_asp.Models;
 
 public class Person : IValidatableObject
 {
+    [BindNever]
     public Guid Id { get; set; }
     
     [Required]
@@ -19,6 +21,9 @@ public class Person : IValidatableObject
     
     [DateRangeValidator("DateOfBirth", ErrorMessage = "Date of death shouldn't be older than DateOfBirth")]
     public DateTime? DateOfDeath { get; set; }
+
+    // Tags[0],Tags[1],etc. will be collected
+    public List<string?> Tags { get; set; } = new List<string?>();
     
     public override string ToString()
     {

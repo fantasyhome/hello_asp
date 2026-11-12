@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using hello_asp.Models;
+using hello_asp.Models;
+
 namespace hello_asp.Controllers;
 
 public class HomeController : Controller
@@ -82,6 +84,7 @@ public class HomeController : Controller
     }
 
     [Route("register")]
+    // 指定Bind时,只有指定的参数参与model binding: public IActionResult Register([Bind(nameof(hello_asp.Models.Person.DateOfBirth))] Person person)
     public IActionResult Register(Person person)
     {
         
