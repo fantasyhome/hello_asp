@@ -53,6 +53,7 @@ public class HomeController : Controller
     }
     
     // Route Parameter has higher priority than query string while model binding
+    // request body need to be enabled using [FromBody]
     // The priority of model binding is: form fields, request body, route data, query string parameters
     // http://localhost:5120/NewBook/1/?bookId=-10&IsLoggedIn=true bookId will be 1,
     // but you can specify the source of model binding
