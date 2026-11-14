@@ -2,7 +2,8 @@ using hello_asp;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<MyMiddleware>();
-builder.Services.AddControllers(); // adds all the controller classes which name end with "controller"
+// builder.Services.AddControllers(); // adds all the controller classes which name end with "controller"
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 app.MapControllers(); // map all methods in controllers
 app.UseStaticFiles();
