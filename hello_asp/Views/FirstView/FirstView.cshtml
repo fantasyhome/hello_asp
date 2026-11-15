@@ -2,6 +2,7 @@
 @{
     string name = "John";
     var person = new Person() { Name = name, DateOfBirth = Convert.ToDateTime("2000-01-05"), Gender = Person.Genders.Male};
+    string alertMessage = $"<script>alert('Hello {name}!');</script>";    
 }
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
     var dateOfBirth = person.DateOfBirth;
 }
 <h2>@dateOfBirth</h2> @* 先替换成<h2>2000/1/5 0:00:00</h2>,再给浏览器渲染.浏览器只看到纯html *@
-
+@Html.Raw(alertMessage)
 @switch (person.Gender)
 {
     case Person.Genders.Male:
