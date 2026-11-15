@@ -1,3 +1,9 @@
+@using hello_asp.Models
+@{
+    string name = "John";
+    var person = new Person() { Name = name, DateOfBirth = Convert.ToDateTime("2000-01-05"), Gender = Person.Genders.Male};
+}
+
 <!DOCTYPE html>
 
 <html>
@@ -7,7 +13,24 @@
 </head>
 <body>
 <div>
-      This is my first view
+    Hello @person.Name
 </div>
+@{
+    var dateOfBirth = person.DateOfBirth;
+}
+<h2>@dateOfBirth</h2> @* 先替换成<h2>2000/1/5 0:00:00</h2>,再给浏览器渲染.浏览器只看到纯html *@
+
+@switch (person.Gender)
+{
+    case Person.Genders.Male:
+        <p>November 19 is International Men's Day</p>
+        break;
+    case Person.Genders.Female:
+        <p>March 8 is International Women's Day</p>
+        break;
+    default:
+        <p>March 31 is International Transgender's Day</p>
+        break;
+}
 </body>
 </html>

@@ -25,6 +25,10 @@ public class Person : IValidatableObject
     // Tags[0],Tags[1],etc. will be collected
     public List<string?> Tags { get; set; } = new List<string?>();
     
+    public enum Genders { Male, Female }
+    
+    public Genders Gender { get; set; } = Genders.Male;
+    
     public override string ToString()
     {
         return JsonSerializer.Serialize(this, new JsonSerializerOptions
