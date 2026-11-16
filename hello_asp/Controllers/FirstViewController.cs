@@ -9,4 +9,11 @@ public class FirstViewController : Controller
     {
         return View(); // Views/FirstView/FirstView.cshtml
     }
+
+    [Route("ViewData")]
+    public IActionResult Index()
+    {
+        ViewData["Data"] = "Data from Controller";
+        return View();
+    }
 }

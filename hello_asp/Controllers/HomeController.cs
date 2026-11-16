@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using hello_asp.Models;
-using hello_asp.Models;
 
 namespace hello_asp.Controllers;
 
