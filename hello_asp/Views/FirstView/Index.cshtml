@@ -1,3 +1,4 @@
+@using hello_asp.Models
 
 
 <!DOCTYPE html>
@@ -8,8 +9,11 @@
     <link href = "~/StyleSheet.css" rel = "stylesheet"/>
 </head>
 <body>
-<div class = "box">
-      <h1>@ViewData["Data"]</h1>
+<div class="box">
+    @* ViewBag是动态类型,优点是使用List之类的复杂类型时不需要写
+    List<Person>? people = (List<Person>?)ViewData["people"]; 
+    缺点是没有静态类型检查 *@
+    <h1>@ViewBag.data</h1>
 </div>
 </body>
 </html>
