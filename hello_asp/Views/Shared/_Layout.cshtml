@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Header"]</title> @* get data from view separately *@
     <link href = "~/StyleSheet.css" rel = "stylesheet"/>
 </head>
 <body>
@@ -11,10 +11,15 @@
         <ul>
             <li><a href = "/"> Home</a></li>
             <li><a href="/Products">All Products</a></li>
+            <li><a href="/Customer">Customer</a></li>
         </ul>
     </div>
     <div class="page-content">
-        @RenderBody() // the content of view will be merged into the layout view at run time
+        @RenderBody()        @* the content of view will be merged into the layout view at run time *@
+    </div>
+    
+    <div>
+        @RenderSection("footer_section", false) @*false means this section is optional*@
     </div>
 </div>
 
