@@ -4,5 +4,24 @@
     padding: 15px;
     border-radius: 8px;
     border: 2px solid #d3d1d1;
-    box-shadow: 0px 0px 3px 2px #ffffff;
+    box-shadow: 0 0 3px 2px #ffffff;
+}
+
+.container
+{
+    min-width: 500px;
+}
+
+.navbar
+{
+    background-color: #cacaca;
+    padding: 10px;
+    box-shadow: 0 1px 2px 2px #cacaca;
+}
+
+.navbar-brand
+{
+    margin: 0 30px 5px 5px;
+    font-size: 1.1em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

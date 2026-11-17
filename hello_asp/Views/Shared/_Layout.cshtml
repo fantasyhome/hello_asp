@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href = "~/StyleSheet.css" rel = "stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <div class = "navbar-brand">AspNet Core App</div>
+        <ul>
+            <li><a href = "/"> Home</a></li>
+            <li><a href="/Products">All Products</a></li>
+        </ul>
+    </div>
+    <div class="page-content">
+        @RenderBody() // the content of view will be merged into the layout view at run time
+    </div>
+</div>
+
+</body>
+</html>

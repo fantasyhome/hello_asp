@@ -5,7 +5,8 @@ namespace hello_asp.Controllers;
 
 public class HomeController : Controller
 {
-    [Route("HomeController")]
+    [Route("/")]
+    [Route("Home")]
     public ContentResult Controller1()
     {
         return Content("Hello Controller!", "text/plain");

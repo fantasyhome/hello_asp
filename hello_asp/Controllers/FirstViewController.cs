@@ -15,5 +15,12 @@ public class FirstViewController : Controller
     {
         ViewData["Data"] = "Data from Controller";
         return View();
+        // 先搜索Views/FirstView/Index.html,再搜索Views/Shared/Index.html
+    }
+
+    [Route("Products")]
+    public IActionResult ProductsWithLayout()
+    {
+        return View();
     }
 }
